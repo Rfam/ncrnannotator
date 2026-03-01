@@ -6,7 +6,7 @@ lint: {}
 
 template:
   org: nf-core
-  name: ncrnatools
+  name: ncrnaflow
   description: ncRNA annotation pipeline
   author: RNAcentral
   version: 1.0dev

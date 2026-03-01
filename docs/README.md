@@ -1,6 +1,6 @@
-# nf-core/ncrnatools: Documentation
+# nf-core/ncrnaflow: Documentation
 
-The nf-core/ncrnatools documentation is split into the following pages:
+The nf-core/ncrnaflow documentation is split into the following pages:
 
 - [Usage](usage.md)
   - An overview of how the pipeline works, how to run it and a description of all of the different command-line flags.

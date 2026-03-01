@@ -1,0 +1,37 @@
+process CMSEARCH {
+    tag "${meta.id}"
+    label 'process_high'
+
+    conda "bioconda::infernal=1.1.4"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/infernal:1.1.4--pl5321h031d066_5' :
+        'quay.io/biocontainers/infernal:1.1.4--pl5321h031d066_5' }"
+
+    input:
+    tuple val(meta), path(chunk)
+    path rfam_cm
+
+    output:
+    tuple val(meta), path("*.tblout"), emit: tblout
+    path "versions.yml",               emit: versions
+
+    script:
+    def args    = task.ext.args ?: ''
+    def prefix  = task.ext.prefix ?: "${meta.id}"
+    """
+    cmsearch \\
+        --rfam \\
+        --cpu ${task.cpus} \\
+        --nohmmonly \\
+        --cut_ga \\
+        --tblout ${prefix}.tblout \\
+        ${args} \\
+        ${rfam_cm} \\
+        ${chunk}
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        infernal: \$(cmsearch -h 2>&1 | grep -m 1 "# INFERNAL" | sed 's/.*INFERNAL //; s/ .*//')
+    END_VERSIONS
+    """
+}

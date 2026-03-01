@@ -1,4 +1,4 @@
-# nf-core/ncrnatools: Citations
+# nf-core/ncrnaflow: Citations
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 
