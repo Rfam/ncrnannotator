@@ -163,9 +163,9 @@ def validateInputParameters() {
         errors << "--fasta is required: path to the genome FASTA file"
     }
     if (!params.mode) {
-        errors << "--mode is required: 'ensembl-vertebrates' or 'ensembl-invertebrates'"
-    } else if (!['ensembl-vertebrates', 'ensembl-invertebrates'].contains(params.mode)) {
-        errors << "--mode '${params.mode}' is not valid. Use 'ensembl-vertebrates' or 'ensembl-invertebrates'"
+        errors << "--mode is required: 'ensembl-vertebrates', 'ensembl-invertebrates', or 'mgnify-assembly'"
+    } else if (!['ensembl-vertebrates', 'ensembl-invertebrates', 'mgnify-assembly'].contains(params.mode)) {
+        errors << "--mode '${params.mode}' is not valid. Use 'ensembl-vertebrates', 'ensembl-invertebrates', or 'mgnify-assembly'"
     }
     if (!params.rfam_cm) {
         errors << "--rfam_cm is required: path to Rfam.cm covariance model file"
