@@ -82,7 +82,7 @@ def extract_rfam_metrics(rfam_cm_path):
             elif line.startswith("CLEN"):
                 current["clen"] = int(line.split()[1])
             elif line.startswith("W"):
-                current["w"] = int(line.split()[1])
+                current["w"] = int(float(line.split()[1]))
             elif line.startswith("GA"):
                 # GA  <seq_ga>  <hmm_ga>;   we use seq_ga
                 parts = line.split()

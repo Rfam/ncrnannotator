@@ -2,10 +2,10 @@ process CMSEARCH {
     tag "${meta.id}"
     label 'process_high'
 
-    conda "bioconda::infernal=1.1.4"
+    conda "bioconda::infernal=1.1.5"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/infernal:1.1.4--pl5321h031d066_5' :
-        'quay.io/biocontainers/infernal:1.1.4--pl5321h031d066_5' }"
+        'https://depot.galaxyproject.org/singularity/infernal:1.1.5--pl5321h7b50bb2_4' :
+        'quay.io/biocontainers/infernal:1.1.5--pl5321h7b50bb2_4' }"
 
     input:
     tuple val(meta), path(chunk)
