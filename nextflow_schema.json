@@ -39,6 +39,13 @@
             "description": "Parameters specific to the ncRNA annotation pipeline.",
             "required": ["fasta", "mode", "rfam_cm", "rfam_seed"],
             "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Not used by this pipeline. Present for nf-core schema compatibility.",
+                    "fa_icon": "fas fa-file-csv",
+                    "hidden": true
+                },
                 "fasta": {
                     "type": "string",
                     "format": "file-path",
