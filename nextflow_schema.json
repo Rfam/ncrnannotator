@@ -58,10 +58,10 @@
                 },
                 "mode": {
                     "type": "string",
-                    "description": "Annotation mode: 'ensembl-vertebrates' (1 Mbp chunks) or 'ensembl-invertebrates' (100 kbp chunks).",
+                    "description": "Annotation mode: 'ensembl-vertebrates' (1 Mbp chunks), 'ensembl-invertebrates' (100 kbp chunks), or 'mgnify-assembly' (50 Mbp chunks, full Rfam, includes prokaryotic rRNA).",
                     "fa_icon": "fas fa-sitemap",
-                    "enum": ["ensembl-vertebrates", "ensembl-invertebrates"],
-                    "help_text": "Selects the Rfam accession list and default chunk size for the target organism clade."
+                    "enum": ["ensembl-vertebrates", "ensembl-invertebrates", "mgnify-assembly"],
+                    "help_text": "Selects the annotation strategy and default chunk size. mgnify-assembly uses the full Rfam database without clade filtering, suitable for metagenomic assemblies."
                 },
                 "rfam_cm": {
                     "type": "string",

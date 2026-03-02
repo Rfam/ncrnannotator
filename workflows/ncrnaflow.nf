@@ -32,7 +32,9 @@ workflow NCRNAFLOW {
     // -----------------------------------------------------------------------
     def chunk_size = params.chunk_size
         ? params.chunk_size as Integer
-        : (params.mode == 'ensembl-vertebrates' ? 1_000_000 : 100_000)
+        : (params.mode == 'ensembl-vertebrates' ? 1_000_000
+        :  params.mode == 'mgnify-assembly'     ? 50_000_000
+        :                                         100_000)
 
     // -----------------------------------------------------------------------
     // Build input channels
@@ -45,17 +47,23 @@ workflow NCRNAFLOW {
     ch_rfam_cm   = file(params.rfam_cm,   checkIfExists: true)
     ch_rfam_seed = file(params.rfam_seed, checkIfExists: true)
 
-    def accession_basename = params.mode == 'ensembl-vertebrates' ? 'vertebrates' : 'invertebrates'
-    ch_accessions = params.rfam_accessions
-        ? file(params.rfam_accessions, checkIfExists: true)
-        : file("${projectDir}/assets/rfam_accessions/${accession_basename}.txt",
-               checkIfExists: true)
-
     // -----------------------------------------------------------------------
     // Step 1: Filter Rfam.cm to clade-specific accessions
+    //         (skipped in mgnify-assembly mode — full Rfam.cm is used directly)
     // -----------------------------------------------------------------------
-    FILTER_RFAM_CM(ch_rfam_cm, ch_accessions)
-    ch_versions = ch_versions.mix(FILTER_RFAM_CM.out.versions)
+    if (params.mode != 'mgnify-assembly') {
+        def accession_basename = params.mode == 'ensembl-vertebrates' ? 'vertebrates' : 'invertebrates'
+        ch_accessions = params.rfam_accessions
+            ? file(params.rfam_accessions, checkIfExists: true)
+            : file("${projectDir}/assets/rfam_accessions/${accession_basename}.txt",
+                   checkIfExists: true)
+
+        FILTER_RFAM_CM(ch_rfam_cm, ch_accessions)
+        ch_versions = ch_versions.mix(FILTER_RFAM_CM.out.versions)
+        ch_filtered_cm = FILTER_RFAM_CM.out.filtered_cm
+    } else {
+        ch_filtered_cm = ch_rfam_cm
+    }
 
     // -----------------------------------------------------------------------
     // Step 2: Chunk genome into windows
@@ -71,7 +79,7 @@ workflow NCRNAFLOW {
     // -----------------------------------------------------------------------
     // Step 3: cmsearch — runs in parallel on each chunk
     // -----------------------------------------------------------------------
-    CMSEARCH(ch_chunks, FILTER_RFAM_CM.out.filtered_cm)
+    CMSEARCH(ch_chunks, ch_filtered_cm)
     ch_versions = ch_versions.mix(CMSEARCH.out.versions.first())
 
     // -----------------------------------------------------------------------
@@ -79,7 +87,7 @@ workflow NCRNAFLOW {
     // -----------------------------------------------------------------------
     PARSE_RFAM(
         CMSEARCH.out.tblout.collect { it[1] },
-        FILTER_RFAM_CM.out.filtered_cm,
+        ch_filtered_cm,
         ch_rfam_seed
     )
     ch_versions = ch_versions.mix(PARSE_RFAM.out.versions)

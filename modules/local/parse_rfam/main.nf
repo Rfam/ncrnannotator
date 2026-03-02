@@ -17,12 +17,14 @@ process PARSE_RFAM {
     path "versions.yml",  emit: versions
 
     script:
+    def args = task.ext.args ?: ''
     """
     parse_rfam_results.py \\
         --tblout_dir tblouts/ \\
         --rfam_cm    ${rfam_cm} \\
         --rfam_seed  ${rfam_seed} \\
-        --output     rfam_hits.tsv
+        --output     rfam_hits.tsv \\
+        ${args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

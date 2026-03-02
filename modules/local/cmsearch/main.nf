@@ -16,16 +16,13 @@ process CMSEARCH {
     path "versions.yml",               emit: versions
 
     script:
-    def args    = task.ext.args ?: ''
+    def args    = task.ext.args ?: '--rfam --nohmmonly --cut_ga'
     def prefix  = task.ext.prefix ?: "${meta.id}"
     """
     cmsearch \\
-        --rfam \\
-        --cpu ${task.cpus} \\
-        --nohmmonly \\
-        --cut_ga \\
-        --tblout ${prefix}.tblout \\
         ${args} \\
+        --cpu ${task.cpus} \\
+        --tblout ${prefix}.tblout \\
         ${rfam_cm} \\
         ${chunk}
 

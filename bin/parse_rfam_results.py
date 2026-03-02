@@ -60,6 +60,8 @@ def parse_args():
                         help="Rfam.seed alignment file")
     parser.add_argument("--output", default="rfam_hits.tsv",
                         help="Output TSV path (default: rfam_hits.tsv)")
+    parser.add_argument("--include_prokaryotic_rrna", action="store_true",
+                        help="Include bacterial/archaeal rRNA models (for mgnify-assembly mode)")
     return parser.parse_args()
 
 
@@ -233,7 +235,7 @@ def remove_rfam_overlap(hits):
 # ---------------------------------------------------------------------------
 # Filter by GA thresholds + rRNA overrides
 # ---------------------------------------------------------------------------
-def filter_rfam_results(hits, cm_metrics, seed_descriptions):
+def filter_rfam_results(hits, cm_metrics, seed_descriptions, include_prokaryotic_rrna=False):
     """
     Apply per-model GA score thresholds.  rRNA models use fixed length-based
     thresholds (RRNA_THRESHOLDS); some prokaryotic rRNA models are skipped.
@@ -245,8 +247,8 @@ def filter_rfam_results(hits, cm_metrics, seed_descriptions):
     for hit in hits:
         name = hit["query_name"]
 
-        # Skip prokaryotic/microsporidia rRNA models
-        if name in RRNA_SKIP:
+        # Skip prokaryotic/microsporidia rRNA models (unless in mgnify-assembly mode)
+        if name in RRNA_SKIP and not include_prokaryotic_rrna:
             continue
 
         # Determine accession: prefer the one from the tblout, fall back to
@@ -380,7 +382,8 @@ def main():
     print(f"  {len(dedup_hits)} hits after overlap removal", file=sys.stderr)
 
     print("parse_rfam_results: applying GA thresholds...", file=sys.stderr)
-    final_hits = filter_rfam_results(dedup_hits, cm_metrics, seed_descriptions)
+    final_hits = filter_rfam_results(dedup_hits, cm_metrics, seed_descriptions,
+                                     include_prokaryotic_rrna=args.include_prokaryotic_rrna)
     print(f"  {len(final_hits)} hits after filtering", file=sys.stderr)
 
     write_tsv(final_hits, args.output)
