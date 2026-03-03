@@ -58,10 +58,10 @@
                 },
                 "mode": {
                     "type": "string",
-                    "description": "Annotation mode: 'ensembl-vertebrates' (1 Mbp chunks), 'ensembl-invertebrates' (100 kbp chunks), or 'mgnify-assembly' (50 Mbp chunks, full Rfam, includes prokaryotic rRNA).",
+                    "description": "Annotation mode: 'ensembl-vertebrates' (1 Mbp chunks), 'ensembl-invertebrates' (100 kbp chunks), 'mgnify-assembly' (50 Mbp chunks, full Rfam, includes prokaryotic rRNA), or 'full' (1 Mbp chunks, full Rfam, eukaryotic only).",
                     "fa_icon": "fas fa-sitemap",
-                    "enum": ["ensembl-vertebrates", "ensembl-invertebrates", "mgnify-assembly"],
-                    "help_text": "Selects the annotation strategy and default chunk size. mgnify-assembly uses the full Rfam database without clade filtering, suitable for metagenomic assemblies."
+                    "enum": ["ensembl-vertebrates", "ensembl-invertebrates", "mgnify-assembly", "full"],
+                    "help_text": "Selects the annotation strategy and default chunk size. mgnify-assembly uses the full Rfam database without clade filtering, suitable for metagenomic assemblies. full uses the complete Rfam database with standard Infernal scoring, eukaryotic output only."
                 },
                 "rfam_cm": {
                     "type": "string",

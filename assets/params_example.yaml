@@ -11,7 +11,7 @@
 # Path to genome assembly (uncompressed or .gz)
 fasta: /path/to/genome.fa
 
-# Annotation mode: ensembl-vertebrates | ensembl-invertebrates | mgnify-assembly
+# Annotation mode: ensembl-vertebrates | ensembl-invertebrates | mgnify-assembly | full
 mode: ensembl-vertebrates
 
 # Rfam database files (download from https://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/)

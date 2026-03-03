@@ -80,6 +80,20 @@ nextflow run nf-core/ncrnaflow \
   -profile docker
 ```
 
+### `full`
+
+Annotates any genome using the complete Rfam database (no clade filtering) with standard Infernal covariance model scoring. Eukaryotic output only (prokaryotic rRNA excluded). Uses 1 Mbp genome chunks.
+
+```bash
+nextflow run nf-core/ncrnaflow \
+  --fasta genome.fa \
+  --mode full \
+  --rfam_cm Rfam.cm \
+  --rfam_seed Rfam.seed \
+  --outdir results \
+  -profile docker
+```
+
 ## Optional parameters
 
 | Parameter | Description | Default |

@@ -30,6 +30,8 @@
 5. Export annotation in GTF, GFF3, and BED formats ([`rfam_to_formats`](bin/rfam_to_formats.py))
 6. Present pipeline metrics ([`MultiQC`](http://multiqc.info/))
 
+![ncrnaflow workflow diagram](docs/images/ncrnaflow.svg)
+
 ## Usage
 
 > [!NOTE]

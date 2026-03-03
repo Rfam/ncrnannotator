@@ -33,6 +33,7 @@ workflow NCRNAFLOW {
     def chunk_size = params.chunk_size
         ? params.chunk_size as Integer
         : (params.mode == 'ensembl-vertebrates' ? 1_000_000
+        :  params.mode == 'full'                ? 1_000_000
         :  params.mode == 'mgnify-assembly'     ? 50_000_000
         :                                         100_000)
 
@@ -49,9 +50,9 @@ workflow NCRNAFLOW {
 
     // -----------------------------------------------------------------------
     // Step 1: Filter Rfam.cm to clade-specific accessions
-    //         (skipped in mgnify-assembly mode — full Rfam.cm is used directly)
+    //         (skipped in mgnify-assembly and full modes — full Rfam.cm used directly)
     // -----------------------------------------------------------------------
-    if (params.mode != 'mgnify-assembly') {
+    if (params.mode in ['ensembl-vertebrates', 'ensembl-invertebrates']) {
         def accession_basename = params.mode == 'ensembl-vertebrates' ? 'vertebrates' : 'invertebrates'
         ch_accessions = params.rfam_accessions
             ? file(params.rfam_accessions, checkIfExists: true)
