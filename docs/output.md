@@ -9,7 +9,7 @@ This document describes the output produced by ncrnaflow. All paths are relative
 ncrnaflow runs the following steps:
 
 1. **FILTER_RFAM_CM** — filter Rfam covariance models to clade-specific accessions (skipped in `mgnify-assembly` and `full` modes)
-2. **GENOME_CHUNK** — split genome into overlapping windows for parallel processing
+2. **GENOME_CHUNK** — split genome into non-overlapping windows for parallel processing
 3. **CMSEARCH** — search each chunk against Rfam covariance models using Infernal
 4. **PARSE_RFAM** — consolidate results, remove overlapping hits, apply GA score thresholds
 5. **RFAM_TO_FORMATS** — convert hits to GTF, GFF3, and BED annotation files
