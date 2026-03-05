@@ -267,10 +267,14 @@ def filter_rfam_results(hits, cm_metrics, seed_descriptions, include_prokaryotic
             if hit_length < threshold:
                 continue
         else:
-            # Use GA from CM file (or default to 0 if not found)
-            cm_info = cm_metrics.get(acc, {})
-            ga = cm_info.get("ga", 0.0)
-            if hit["score"] < ga:
+            cm_info = cm_metrics.get(acc)
+            if cm_info is None or "ga" not in cm_info:
+                print(
+                    f"WARNING: no GA threshold for model '{name}' (acc='{acc}') — skipping hit",
+                    file=sys.stderr,
+                )
+                continue
+            if hit["score"] < cm_info["ga"]:
                 continue
 
         # Assign biotype from seed descriptions (or derive from model name)
