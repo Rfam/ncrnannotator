@@ -38,26 +38,36 @@ def load_accessions(accessions_file):
     return accessions
 
 
+def iter_cm_records(path):
+    record_lines = []
+    with open(path) as fh:
+        for line in fh:
+            record_lines.append(line)
+            if line.strip() == "//":
+                yield record_lines
+                record_lines = []
+
+        # Handle malformed files that do not end with //
+        if record_lines:
+            yield record_lines
+
+
 def filter_rfam_cm(rfam_cm_path, accessions, output_path):
     """Split Rfam.cm on '//' records and write only matching models."""
     rf_accession_re = re.compile(r"\bRF\d{5}\b")
 
-    with open(rfam_cm_path) as fh:
-        content = fh.read()
-
-    # Each CM record ends with '//' followed by a newline
-    records = content.split("//\n")
-
     kept = 0
     skipped = 0
+
     with open(output_path, "w") as out:
-        for record in records:
-            record = record.strip()
-            if not record:
-                continue
-            match = rf_accession_re.search(record)
+        for record_lines in iter_cm_records(rfam_cm_path):
+            record_text = "".join(record_lines)
+            match = rf_accession_re.search(record_text)
+
             if match and match.group(0) in accessions:
-                out.write(record + "\n//\n")
+                out.write(record_text)
+                if not record_text.endswith("\n"):
+                    out.write("\n")
                 kept += 1
             else:
                 skipped += 1
