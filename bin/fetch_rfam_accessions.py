@@ -121,22 +121,19 @@ def parse_args():
     return parser.parse_args()
 
 
-def fetch_accessions(conn, clade_config):
+def fetch_accessions(conn, clade, clade_config):
     """Execute the Rfam query and return a sorted list of RF##### accessions."""
     ncbi_id = clade_config["ncbi_id"]
     cursor = conn.cursor()
 
-    # Try the simple query first (more robust)
     try:
-        cursor.execute(RFAM_SQL_SIMPLE, (ncbi_id, ncbi_id))
+        cursor.execute(RFAM_SQL, (f"%{clade}%",))
         rows = cursor.fetchall()
         accessions = sorted(set(r[0] for r in rows))
     except Exception as exc:
-        print(f"WARNING: simple query failed ({exc}), trying full query...",
+        print(f"WARNING: full query failed ({exc}), trying ncbi_id fallback...",
               file=sys.stderr)
-        # Fallback to name-based query
-        clade_name = f"%{list(CLADE_CONFIGS.keys())[0]}%"
-        cursor.execute(RFAM_SQL, (clade_name,))
+        cursor.execute(RFAM_SQL_SIMPLE, (ncbi_id, ncbi_id))
         rows = cursor.fetchall()
         accessions = sorted(set(r[0] for r in rows))
 
@@ -178,7 +175,7 @@ def main():
     try:
         print(f"Fetching accessions for clade '{args.clade}' "
               f"(NCBI taxid {clade_config['ncbi_id']})...", file=sys.stderr)
-        accessions = fetch_accessions(conn, clade_config)
+        accessions = fetch_accessions(conn, args.clade, clade_config)
         print(f"  Retrieved {len(accessions)} accessions", file=sys.stderr)
     finally:
         conn.close()
