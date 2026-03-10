@@ -18,13 +18,13 @@ nextflow run nf-core/ncrnannotator \
 
 ## Required inputs
 
-| Parameter | Description |
-|-----------|-------------|
-| `--fasta` | Genome assembly in FASTA format (uncompressed or `.gz`) |
-| `--mode` | Annotation mode (see below) |
-| `--rfam_cm` | Rfam covariance model file (`Rfam.cm`) |
-| `--rfam_seed` | Rfam seed alignment file (`Rfam.seed`) |
-| `--outdir` | Output directory |
+| Parameter     | Description                                             |
+| ------------- | ------------------------------------------------------- |
+| `--fasta`     | Genome assembly in FASTA format (uncompressed or `.gz`) |
+| `--mode`      | Annotation mode (see below)                             |
+| `--rfam_cm`   | Rfam covariance model file (`Rfam.cm`)                  |
+| `--rfam_seed` | Rfam seed alignment file (`Rfam.seed`)                  |
+| `--outdir`    | Output directory                                        |
 
 ### Obtaining Rfam files
 
@@ -96,9 +96,9 @@ nextflow run nf-core/ncrnannotator \
 
 ## Optional parameters
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `--chunk_size` | Override genome chunk size (bp) | Mode-dependent |
+| Parameter           | Description                                          | Default          |
+| ------------------- | ---------------------------------------------------- | ---------------- |
+| `--chunk_size`      | Override genome chunk size (bp)                      | Mode-dependent   |
 | `--rfam_accessions` | Custom Rfam accession list (overrides bundled lists) | Bundled per mode |
 
 ### Custom chunk size

@@ -32,17 +32,17 @@ Intermediate Rfam files published for inspection and reuse.
 
 #### `rfam_hits.tsv` format
 
-| Column | Description |
-|--------|-------------|
-| `seqname` | Sequence name from the input FASTA |
-| `start` | Hit start position (1-based) |
-| `end` | Hit end position (1-based, inclusive) |
-| `strand` | Strand (`+` or `-`) |
-| `score` | Infernal bit score |
-| `evalue` | E-value |
-| `query_name` | Rfam model name (e.g. `U1`, `5S_rRNA`) |
-| `accession` | Rfam accession (e.g. `RF00003`) |
-| `biotype` | Ensembl-style biotype (e.g. `snRNA`, `snoRNA`, `rRNA`, `lncRNA`) |
+| Column       | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| `seqname`    | Sequence name from the input FASTA                               |
+| `start`      | Hit start position (1-based)                                     |
+| `end`        | Hit end position (1-based, inclusive)                            |
+| `strand`     | Strand (`+` or `-`)                                              |
+| `score`      | Infernal bit score                                               |
+| `evalue`     | E-value                                                          |
+| `query_name` | Rfam model name (e.g. `U1`, `5S_rRNA`)                           |
+| `accession`  | Rfam accession (e.g. `RF00003`)                                  |
+| `biotype`    | Ensembl-style biotype (e.g. `snRNA`, `snoRNA`, `rRNA`, `lncRNA`) |
 
 ### `annotation/`
 
@@ -106,20 +106,20 @@ Standard GFF3 with `gene` → `ncRNA` (or biotype-specific type) → `exon` hier
 
 The following biotypes are assigned based on Rfam model names and seed classifications:
 
-| Biotype | Examples |
-|---------|---------|
-| `snRNA` | U1, U2, U4, U5, U6, U11, U12 |
-| `snoRNA` | SNORD, SNORA families |
-| `scaRNA` | scaRNA families |
-| `rRNA` | 5S_rRNA, 5_8S_rRNA, SSU_rRNA_eukarya, LSU_rRNA_eukarya |
-| `rRNA` (prokaryotic, `mgnify-assembly` only) | SSU_rRNA_bacteria, LSU_rRNA_archaea, etc. |
-| `tRNA` | tRNA families |
-| `pre_miRNA` | miRNA precursors |
-| `lncRNA` | Long non-coding RNA |
-| `SRP_RNA` | Signal recognition particle RNA |
-| `RNase_P_RNA` | RNase P families |
-| `vault_RNA` | Vault RNA |
-| `Y_RNA` | Y RNA families |
-| `ribozyme` | Ribozyme families |
-| `antisense_RNA` | Antisense RNA |
-| `ncRNA` | Other non-coding RNA (default) |
+| Biotype                                      | Examples                                               |
+| -------------------------------------------- | ------------------------------------------------------ |
+| `snRNA`                                      | U1, U2, U4, U5, U6, U11, U12                           |
+| `snoRNA`                                     | SNORD, SNORA families                                  |
+| `scaRNA`                                     | scaRNA families                                        |
+| `rRNA`                                       | 5S_rRNA, 5_8S_rRNA, SSU_rRNA_eukarya, LSU_rRNA_eukarya |
+| `rRNA` (prokaryotic, `mgnify-assembly` only) | SSU_rRNA_bacteria, LSU_rRNA_archaea, etc.              |
+| `tRNA`                                       | tRNA families                                          |
+| `pre_miRNA`                                  | miRNA precursors                                       |
+| `lncRNA`                                     | Long non-coding RNA                                    |
+| `SRP_RNA`                                    | Signal recognition particle RNA                        |
+| `RNase_P_RNA`                                | RNase P families                                       |
+| `vault_RNA`                                  | Vault RNA                                              |
+| `Y_RNA`                                      | Y RNA families                                         |
+| `ribozyme`                                   | Ribozyme families                                      |
+| `antisense_RNA`                              | Antisense RNA                                          |
+| `ncRNA`                                      | Other non-coding RNA (default)                         |

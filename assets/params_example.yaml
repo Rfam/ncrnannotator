@@ -15,12 +15,11 @@ fasta: /path/to/genome.fa
 mode: ensembl-vertebrates
 
 # Rfam database files (download from https://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/)
-rfam_cm:   /path/to/Rfam.cm
+rfam_cm: /path/to/Rfam.cm
 rfam_seed: /path/to/Rfam.seed
 
 # Output directory
 outdir: results
-
 # ---------------------------------------------------------------------------
 # Optional parameters
 # ---------------------------------------------------------------------------
