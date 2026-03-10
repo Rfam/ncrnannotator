@@ -1,11 +1,11 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/ncrnatools
+    nf-core/ncrnannotator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/ncrnatools
-    Website: https://nf-co.re/ncrnatools
-    Slack  : https://nfcore.slack.com/channels/ncrnatools
+    Github : https://github.com/nf-core/ncrnannotator
+    Website: https://nf-co.re/ncrnannotator
+    Slack  : https://nfcore.slack.com/channels/ncrnannotator
 ----------------------------------------------------------------------------------------
 */
 
@@ -15,21 +15,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NCRNATOOLS  } from './workflows/ncrnatools'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    GENOME PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-// TODO nf-core: Remove this line if you don't need a FASTA file
-//   This is an example of how to use getGenomeAttribute() to fetch parameters
-//   from igenomes.config using `--genome`
-params.fasta = getGenomeAttribute('fasta')
+include { NCRNANNOTATOR             } from './workflows/ncrnannotator'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,24 +26,17 @@ params.fasta = getGenomeAttribute('fasta')
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: Run main analysis pipeline
 //
-workflow NFCORE_NCRNATOOLS {
-
-    take:
-    samplesheet // channel: samplesheet read in from --input
+workflow NFCORE_NCRNANNOTATOR {
 
     main:
+    NCRNANNOTATOR()
 
-    //
-    // WORKFLOW: Run pipeline
-    //
-    NCRNATOOLS (
-        samplesheet
-    )
     emit:
-    multiqc_report = NCRNATOOLS.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = NCRNANNOTATOR.out.multiqc_report
 }
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -65,6 +46,7 @@ workflow NFCORE_NCRNATOOLS {
 workflow {
 
     main:
+
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
@@ -74,7 +56,6 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input,
         params.help,
         params.help_full,
         params.show_hidden
@@ -83,9 +64,8 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_NCRNATOOLS (
-        PIPELINE_INITIALISATION.out.samplesheet
-    )
+    NFCORE_NCRNANNOTATOR()
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -96,7 +76,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_NCRNATOOLS.out.multiqc_report
+        NFCORE_NCRNANNOTATOR.out.multiqc_report
     )
 }
 

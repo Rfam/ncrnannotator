@@ -2,11 +2,16 @@ repository_type: pipeline
 
 nf_core_version: 3.5.2
 
-lint: {}
+lint:
+  files_unchanged:
+    - docs/images/nf-core-ncrnannotator_logo_light.png
+    - docs/images/nf-core-ncrnannotator_logo_dark.png
+    - assets/nf-core-ncrnannotator_logo_light.png
+  included_configs: false
 
 template:
   org: nf-core
-  name: ncrnatools
+  name: ncrnannotator
   description: ncRNA annotation pipeline
   author: RNAcentral
   version: 1.0dev
