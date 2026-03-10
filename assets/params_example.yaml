@@ -1,5 +1,5 @@
-# ncrnaflow example params file
-# Usage: nextflow run Rfam/ncrnaflow -params-file params.yaml -profile docker
+# ncrnannotator example params file
+# Usage: nextflow run Rfam/ncrnannotator -params-file params.yaml -profile docker
 #
 # Fill in the paths below and select the annotation mode that matches your data.
 # Remove or comment out optional parameters you don't need.

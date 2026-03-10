@@ -1,6 +1,6 @@
 {
-    "name": "nf-core/ncrnaflow",
-    "homePage": "https://github.com/nf-core/ncrnaflow",
+    "name": "nf-core/ncrnannotator",
+    "homePage": "https://github.com/nf-core/ncrnannotator",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {

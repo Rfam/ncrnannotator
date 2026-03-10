@@ -2,6 +2,6 @@ contact_links:
   - name: Join nf-core
     url: https://nf-co.re/join
     about: Please join the nf-core community here
-  - name: "Slack #ncrnaflow channel"
-    url: https://nfcore.slack.com/channels/ncrnaflow
-    about: Discussion about the nf-core/ncrnaflow pipeline
+  - name: "Slack #ncrnannotator channel"
+    url: https://nfcore.slack.com/channels/ncrnannotator
+    about: Discussion about the nf-core/ncrnannotator pipeline

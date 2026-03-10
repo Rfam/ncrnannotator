@@ -1,12 +1,12 @@
-# nf-core/ncrnaflow: Output
+# nf-core/ncrnannotator: Output
 
 ## Introduction
 
-This document describes the output produced by ncrnaflow. All paths are relative to the `--outdir` directory specified at runtime.
+This document describes the output produced by ncrnannotator. All paths are relative to the `--outdir` directory specified at runtime.
 
 ## Pipeline overview
 
-ncrnaflow runs the following steps:
+ncrnannotator runs the following steps:
 
 1. **FILTER_RFAM_CM** — filter Rfam covariance models to clade-specific accessions (skipped in `mgnify-assembly` and `full` modes)
 2. **GENOME_CHUNK** — split genome into non-overlapping windows for parallel processing
@@ -98,7 +98,7 @@ Standard GFF3 with `gene` → `ncRNA` (or biotype-specific type) → `exon` hier
   - `execution_report.html` — Nextflow execution report (resource usage per task)
   - `execution_timeline.html` — timeline of all tasks
   - `execution_trace.txt` — tab-separated trace of all tasks
-  - `nf_core_ncrnaflow_software_mqc_versions.yml` — software versions used
+  - `nf_core_ncrnannotator_software_mqc_versions.yml` — software versions used
 
 </details>
 

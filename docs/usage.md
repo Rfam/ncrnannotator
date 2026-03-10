@@ -1,13 +1,13 @@
-# nf-core/ncrnaflow: Usage
+# nf-core/ncrnannotator: Usage
 
 ## Introduction
 
-ncrnaflow annotates non-coding RNA in genome assemblies using [Infernal](http://eddylab.org/infernal/) and the [Rfam](https://rfam.org/) database. It produces annotation files in GTF, GFF3, and BED format.
+ncrnannotator annotates non-coding RNA in genome assemblies using [Infernal](http://eddylab.org/infernal/) and the [Rfam](https://rfam.org/) database. It produces annotation files in GTF, GFF3, and BED format.
 
 ## Quick start
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta genome.fa \
   --mode ensembl-vertebrates \
   --rfam_cm Rfam.cm \
@@ -43,7 +43,7 @@ gunzip Rfam.cm.gz Rfam.seed.gz
 Annotates vertebrate genomes using a curated subset of Rfam families (snRNA, snoRNA, rRNA, SRP RNA, Y RNA, RNase P, Vault RNA). Uses 1 Mbp genome chunks.
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta Homo_sapiens.GRCh38.fa \
   --mode ensembl-vertebrates \
   --rfam_cm Rfam.cm \
@@ -57,7 +57,7 @@ nextflow run nf-core/ncrnaflow \
 Annotates invertebrate genomes using a curated subset of Rfam families. Uses 100 kbp genome chunks for higher sensitivity on compact genomes.
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta Caenorhabditis_elegans.WBcel235.fa \
   --mode ensembl-invertebrates \
   --rfam_cm Rfam.cm \
@@ -71,7 +71,7 @@ nextflow run nf-core/ncrnaflow \
 Annotates metagenomic assemblies using the full Rfam database (no clade filtering). Includes prokaryotic rRNA (bacterial, archaeal). Uses 50 Mbp genome chunks.
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta metagenome_assembly.fa \
   --mode mgnify-assembly \
   --rfam_cm Rfam.cm \
@@ -85,7 +85,7 @@ nextflow run nf-core/ncrnaflow \
 Annotates any genome using the complete Rfam database (no clade filtering) with standard Infernal covariance model scoring. Eukaryotic output only (prokaryotic rRNA excluded). Uses 1 Mbp genome chunks.
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta genome.fa \
   --mode full \
   --rfam_cm Rfam.cm \
@@ -115,7 +115,7 @@ For very large genomes or limited memory, override the chunk size:
 When running locally, use a custom config to cap resource usage:
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta genome.fa \
   --mode ensembl-invertebrates \
   --rfam_cm Rfam.cm \
@@ -132,7 +132,7 @@ The bundled `conf/local.config` limits memory to 20 GB and 8 CPUs. Edit it to ma
 Rather than specifying all parameters on the command line, you can use a YAML params file:
 
 ```bash
-nextflow run nf-core/ncrnaflow -params-file params.yaml -profile docker
+nextflow run nf-core/ncrnannotator -params-file params.yaml -profile docker
 ```
 
 An example params file is provided at [`assets/params_example.yaml`](../assets/params_example.yaml).
@@ -145,7 +145,7 @@ An example params file is provided at [`assets/params_example.yaml`](../assets/p
 Add `-resume` to restart from the last successful step:
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta genome.fa \
   --mode ensembl-vertebrates \
   --rfam_cm Rfam.cm \
@@ -160,7 +160,7 @@ nextflow run nf-core/ncrnaflow \
 ### SLURM example
 
 ```bash
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   --fasta genome.fa \
   --mode ensembl-vertebrates \
   --rfam_cm Rfam.cm \
@@ -174,12 +174,12 @@ Run Nextflow itself in a SLURM job to avoid timeouts on the head node:
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=ncrnaflow
+#SBATCH --job-name=ncrnannotator
 #SBATCH --time=24:00:00
 #SBATCH --mem=8G
 #SBATCH --cpus-per-task=2
 
-nextflow run nf-core/ncrnaflow \
+nextflow run nf-core/ncrnannotator \
   -params-file params.yaml \
   -profile singularity \
   -resume
@@ -190,7 +190,7 @@ nextflow run nf-core/ncrnaflow \
 Pin the pipeline version with `-r`:
 
 ```bash
-nextflow run nf-core/ncrnaflow -r 1.0.0 \
+nextflow run nf-core/ncrnannotator -r 1.0.0 \
   --fasta genome.fa \
   --mode ensembl-vertebrates \
   --rfam_cm Rfam.cm \

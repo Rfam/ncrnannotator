@@ -12,7 +12,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_ncrnaflow_pipeline'
+include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,7 +20,7 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_ncrn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-workflow NCRNAFLOW {
+workflow NCRNANNOTATOR {
 
     main:
 
@@ -123,7 +123,7 @@ workflow NCRNAFLOW {
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_ncrnaflow_software_mqc_versions.yml',
+            name: 'nf_core_ncrnannotator_software_mqc_versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }

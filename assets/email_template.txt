@@ -4,15 +4,15 @@
   |\\ | |__  __ /  ` /  \\ |__) |__         }  {
   | \\| |       \\__, \\__/ |  \\ |___     \\`-._,-`-,
                                         `._,._,'
-  nf-core/ncrnaflow ${version}
+  nf-core/ncrnannotator ${version}
 ----------------------------------------------------
 Run Name: $runName
 
 <% if (success){
-    out << "## nf-core/ncrnaflow execution completed successfully! ##"
+    out << "## nf-core/ncrnannotator execution completed successfully! ##"
 } else {
     out << """####################################################
-## nf-core/ncrnaflow execution completed unsuccessfully! ##
+## nf-core/ncrnannotator execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -35,5 +35,5 @@ Pipeline Configuration:
 <% out << summary.collect{ k,v -> " - $k: $v" }.join("\n") %>
 
 --
-nf-core/ncrnaflow
-https://github.com/nf-core/ncrnaflow
+nf-core/ncrnannotator
+https://github.com/nf-core/ncrnannotator

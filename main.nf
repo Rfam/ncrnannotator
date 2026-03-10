@@ -1,11 +1,11 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/ncrnaflow
+    nf-core/ncrnannotator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/ncrnaflow
-    Website: https://nf-co.re/ncrnaflow
-    Slack  : https://nfcore.slack.com/channels/ncrnaflow
+    Github : https://github.com/nf-core/ncrnannotator
+    Website: https://nf-co.re/ncrnannotator
+    Slack  : https://nfcore.slack.com/channels/ncrnannotator
 ----------------------------------------------------------------------------------------
 */
 
@@ -15,9 +15,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NCRNAFLOW             } from './workflows/ncrnaflow'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnaflow_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnaflow_pipeline'
+include { NCRNANNOTATOR             } from './workflows/ncrnannotator'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,13 +28,13 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrn
 //
 // WORKFLOW: Run main analysis pipeline
 //
-workflow NFCORE_NCRNAFLOW {
+workflow NFCORE_NCRNANNOTATOR {
 
     main:
-    NCRNAFLOW()
+    NCRNANNOTATOR()
 
     emit:
-    multiqc_report = NCRNAFLOW.out.multiqc_report
+    multiqc_report = NCRNANNOTATOR.out.multiqc_report
 }
 
 /*
@@ -64,7 +64,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_NCRNAFLOW()
+    NFCORE_NCRNANNOTATOR()
 
     //
     // SUBWORKFLOW: Run completion tasks
@@ -76,7 +76,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_NCRNAFLOW.out.multiqc_report
+        NFCORE_NCRNANNOTATOR.out.multiqc_report
     )
 }
 
