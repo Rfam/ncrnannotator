@@ -62,7 +62,7 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/ncrnannotator was originally written by the RNA Resources team at EMBL-EBI.
+The first version of nf-core/ncrnannotator was written by Pedro Madrigal and Victoria Begley, members of the RNA Resources team at EMBL-EBI.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
