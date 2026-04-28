@@ -1,11 +1,11 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/ncrnatools
+    nf-core/ncrnannotator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/ncrnatools
-    Website: https://nf-co.re/ncrnatools
-    Slack  : https://nfcore.slack.com/channels/ncrnatools
+    Github : https://github.com/nf-core/ncrnannotator
+    Website: https://nf-co.re/ncrnannotator
+    Slack  : https://nfcore.slack.com/channels/ncrnannotator
 ----------------------------------------------------------------------------------------
 */
 
@@ -15,10 +15,10 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NCRNATOOLS  } from './workflows/ncrnatools'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_ncrnatools_pipeline'
+include { NCRNANNOTATOR  } from './workflows/ncrnannotator'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
+include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_ncrnannotator_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,7 +40,7 @@ params.fasta = getGenomeAttribute('fasta')
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NFCORE_NCRNATOOLS {
+workflow NFCORE_NCRNANNOTATOR {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -50,11 +50,15 @@ workflow NFCORE_NCRNATOOLS {
     //
     // WORKFLOW: Run pipeline
     //
-    NCRNATOOLS (
-        samplesheet
+    NCRNANNOTATOR (
+        samplesheet,
+        params.multiqc_config,
+        params.multiqc_logo,
+        params.multiqc_methods_description,
+        params.outdir,
     )
     emit:
-    multiqc_report = NCRNATOOLS.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = NCRNANNOTATOR.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,7 +87,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_NCRNATOOLS (
+    NFCORE_NCRNANNOTATOR (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
@@ -95,8 +99,7 @@ workflow {
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        params.hook_url,
-        NFCORE_NCRNATOOLS.out.multiqc_report
+        NFCORE_NCRNANNOTATOR.out.multiqc_report
     )
 }
 

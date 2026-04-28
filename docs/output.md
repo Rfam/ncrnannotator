@@ -1,4 +1,4 @@
-# nf-core/ncrnatools: Output
+# nf-core/ncrnannotator: Output
 
 ## Introduction
 
