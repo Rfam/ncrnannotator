@@ -1,14 +1,15 @@
 repository_type: pipeline
-
 nf_core_version: 3.5.2
-
 lint:
   files_unchanged:
     - docs/images/nf-core-ncrnannotator_logo_light.png
     - docs/images/nf-core-ncrnannotator_logo_dark.png
     - assets/nf-core-ncrnannotator_logo_light.png
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
   included_configs: false
-
+  files_exist:
+    - .github/workflows/linting_comment.yml
 template:
   org: nf-core
   name: ncrnannotator
