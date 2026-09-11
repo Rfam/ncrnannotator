@@ -6,16 +6,16 @@
                     "infernal": "1.1.5"
                 },
                 "FILTER_RFAM_CM": {
-                    "python": "3.10.21"
+                    "python": "3.10.2"
                 },
                 "GENOME_CHUNK": {
-                    "python": "3.10.21"
+                    "python": "3.10.2"
                 },
                 "PARSE_RFAM": {
-                    "python": "3.10.21"
+                    "python": "3.10.2"
                 },
                 "RFAM_TO_FORMATS": {
-                    "python": "3.10.21"
+                    "python": "3.10.2"
                 },
                 "Workflow": {
                     "nf-core/ncrnannotator": "v1.0dev"
