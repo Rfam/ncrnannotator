@@ -7,6 +7,8 @@ lint:
     - assets/nf-core-ncrnannotator_logo_light.png
     - .github/workflows/branch.yml
     - .github/workflows/linting.yml
+  template_strings:
+    - tests/data/rfam_test.seed
   included_configs: false
 nf_core_version: 4.1.0
 repository_type: pipeline

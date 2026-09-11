@@ -27,7 +27,7 @@ workflow NCRNANNOTATOR {
     multiqc_logo
     multiqc_methods_description
     outdir
-    
+
     main:
 
     ch_versions      = channel.empty()
