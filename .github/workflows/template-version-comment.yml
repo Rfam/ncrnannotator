@@ -6,8 +6,13 @@ on:
   pull_request:
 
 permissions: {}
+on:
+  pull_request:
+
+permissions: {}
 
 jobs:
+  check_template_version:
   check_template_version:
     runs-on: ubuntu-latest
     steps:
