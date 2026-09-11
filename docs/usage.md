@@ -227,7 +227,11 @@ Restart from cached intermediate results. See the [Nextflow resume docs](https:/
 
 ### `-c`
 
-Specify the path to a specific config file (this is a core Nextflow command). See the [nf-core website documentation](https://nf-co.re/usage/configuration) for more information.
+Provide a custom config for resource tuning only:
+
+```bash
+-c conf/local.config
+```
 
 ## Nextflow memory requirements
 

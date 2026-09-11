@@ -1,5 +1,4 @@
 # nf-core/ncrnannotator: Output
-# nf-core/ncrnannotator: Output
 
 ## Introduction
 

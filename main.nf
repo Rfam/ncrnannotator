@@ -2,11 +2,7 @@
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     nf-core/ncrnannotator
-    nf-core/ncrnannotator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/ncrnannotator
-    Website: https://nf-co.re/ncrnannotator
-    Slack  : https://nfcore.slack.com/channels/ncrnannotator
     Github : https://github.com/nf-core/ncrnannotator
     Website: https://nf-co.re/ncrnannotator
     Slack  : https://nfcore.slack.com/channels/ncrnannotator

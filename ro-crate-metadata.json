@@ -93,7 +93,6 @@
                 }
             ],
             "isBasedOn": "https://github.com/nf-core/ncrnannotator",
-            "isBasedOn": "https://github.com/nf-core/ncrnannotator",
             "license": "MIT",
             "mainEntity": {
                 "@id": "main.nf"
@@ -103,7 +102,6 @@
                     "@id": "#50208a9f-ad6c-4bcc-b1b4-ab3f28b8359c"
                 }
             ],
-            "name": "nf-core/ncrnannotator"
             "name": "nf-core/ncrnannotator"
         },
         {
@@ -168,13 +166,10 @@
                 "@id": "main.nf"
             },
             "name": "Test suite for nf-core/ncrnannotator"
-            "name": "Test suite for nf-core/ncrnannotator"
         },
         {
             "@id": "#bedefeee-da24-4f70-976c-1543c4ad7625",
             "@type": "TestInstance",
-            "name": "GitHub Actions workflow for testing nf-core/ncrnannotator",
-            "resource": "repos/nf-core/ncrnannotator/actions/workflows/nf-test.yml",
             "name": "GitHub Actions workflow for testing nf-core/ncrnannotator",
             "resource": "repos/nf-core/ncrnannotator/actions/workflows/nf-test.yml",
             "runsOn": {
@@ -308,4 +303,3 @@
         }
     ]
 }
-
